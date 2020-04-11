@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="q.css">
+	<style type="text/css">
+		.player{
+			width: 150px;
+			height: 225px;
+			background-size: 100% 100%;
+			transition: 1s;
+		}
+		
+		.enemy{
+			width: 150px;
+			height: 225px;
+			background-size: 100% 100%;
+			transition: 1s;
+		}
+		
+	</style>
+</head>
+<body style="background-image: url(bg/2.jpg); background-size: 100%;" class="bg">
+	<!-- div для начального меню -->
+	<div class="origin">
+		<button class="btn btn-secondary start_btn" style="position: absolute; left: 80%; top: 2%; width: 250px">Начать игру</button>
+		<button class="btn btn-secondary map_btn" style="position: absolute; left: 81.5%; top: 9%; width: 230px">Локации</button>
+		<button class="btn btn-secondary card_btn" style="position: absolute; left: 83%; top: 16%; width: 210px">Колода</button>
+	</div>
+	<!-- div для меню создания колоды -->
+	<div class="deck">
+		<div class="col-12 mt-2" style="height: 100px; background: #948e7c; opacity: 70%;">
+			
+		</div>
+		<div class="row col-12 ml-0 mt-2 pt-2 pl-0 pr-0" style="height: 540px; background: #948e7c; opacity: 90%;">
+			<div class="col-3 ml-4 pt-2" style="height: 520px; background: #69665e; opacity: 150%">
+				<button class="btn btn-dark create-deck">Создать колоду</button>
+				<button class="btn btn-dark reincarnation">Реинкарнация</button>
+				<button class="btn btn-dark back1" style="position: absolute; top: 470px; left: 10px">Назад</button>
+			</div>
+			<div class="col-8 ml-5 pl-0 pr-0 pt-3 cards" style="height: 520px; background: #69665e; opacity: 150%">
+				
+			</div>
+		</div>
+	</div>
+	<!-- div для меню выбора локации -->
+	<div class="map">
+		<div class="preview col-6 bg-dark border border-white" style="position: absolute; height: 400px; top: 100px; left: 200px; background-size: 100%; opacity: 0.4">
+			
+		</div>
+		<div class="col-2 pt-1" style="height: 300px; position: absolute; left: 1120px; top: 20px; background: #50a39a; opacity: 90%">
+			<button class="btn btn-secondary mt-3 ml-1 map-btn1" style="width: 200px;">1 Карта</button>
+			<button class="btn btn-secondary mt-3 ml-1 map-btn2" style="width: 200px;">2 Карта</button>
+			<button class="btn btn-secondary mt-3 ml-1 map-btn3" style="width: 200px;">3 Карта</button>
+			<button class="btn btn-secondary mt-3 ml-1 map-btn4" style="width: 200px;">4 Карта</button>
+			<button class="btn btn-secondary mt-3 ml-1 map-btn5" style="width: 200px;">5 Карта</button>
+		</div>
+		<button class="btn btn-dark back2" style="position: absolute; top: 570px; left: 1250px; width: 100px;">Назад</button>
+	</div>
+	<!-- div для самой игры. Пока не доделано ¯\_(ツ)_/ -->
+	<div class="game">
+		<button class="btn btn-dark back3" style="position: absolute; top: 570px; left: 1050px; width: 100px; display: none">Назад</button>
+		<button class="btn btn-dark hod" style="position: absolute; top: 570px; left: 900px; width: 100px; display: none">Ход</button>
+
+	</div>
+	
+		<div class="player hodp" style="position: absolute; left: 420px; top: 150px;">
+			<h5 style="position: inherit; top: 190px; left: 22px"><span class="dmgp1"></span></h5>
+			<h5 style="position: inherit; top: 192px; left: 125px"><span class="hpp1"></span></h5>
+		</div>
+		<div class="ml-4 player hodp" style="position: absolute; left: 580px; top: 150px;">
+			<h5 style="position: inherit; top: 190px; left: 22px"><span class="dmgp2"></span></h5>
+			<h5 style="position: inherit; top: 192px; left: 125px"><span class="hpp2"></span></h5>
+		</div>
+		<div class="ml-4 player hodp" style="position: absolute; left: 780px; top: 150px;">
+			<h5 style="position: inherit; top: 190px; left: 22px"><span class="dmgp3"></span></h5>
+			<h5 style="position: inherit; top: 192px; left: 125px"><span class="hpp3"></span></h5>
+		</div>
+		<div class="ml-4 player hodp" style="position: absolute; left: 960px; top: 150px;">
+			<h5 style="position: inherit; top: 190px; left: 22px"><span class="dmgp4"></span></h5>
+			<h5 style="position: inherit; top: 192px; left: 125px"><span class="hpp4"></span></h5>
+		</div>
+		<h1 class="font-weight-normal text-white deckpname" style="position: absolute; left: 1170px; top: 200px">Игрок</h1>
+	
+	
+		<div class="enemy hode" style="position: absolute; left: 420px; top: 400px;">
+			<h5 style="position: inherit; top: 190px; left: 22px"><span class="dmge1"></span></h5>
+			<h5 style="position: inherit; top: 192px; left: 125px"><span class="hpe1"></span></h5>
+		</div>
+		<div class="ml-4 enemy hode" style="position: absolute; left: 580px; top: 400px;">
+			<h5 style="position: inherit; top: 190px; left: 22px"><span class="dmge2"></span></h5>
+			<h5 style="position: inherit; top: 192px; left: 125px"><span class="hpe2"></span></h5>
+		</div>
+		<div class="ml-4 enemy hode" style="position: absolute; left: 780px; top: 400px;">
+			<h5 style="position: inherit; top: 190px; left: 22px"><span class="dmge3"></span></h5>
+			<h5 style="position: inherit; top: 192px; left: 125px"><span class="hpe3"></span></h5>
+		</div>
+		<div class="ml-4 enemy hode" style="position: absolute; left: 960px; top: 400px;">
+			<h5 style="position: inherit; top: 190px; left: 22px"><span class="dmge4"></span></h5>
+			<h5 style="position: inherit; top: 192px; left: 125px"><span class="hpe4"></span></h5>
+		</div>
+		<h1 class="font-weight-normal text-white deckename" style="position: absolute; left: 1170px; top: 480px">Враг</h1>
+	
+
+	<script type="text/javascript">
+		let start_btn = document.querySelector(".start_btn");
+		let map_btn = document.querySelector(".map_btn");
+		let card_btn = document.querySelector(".card_btn");
+		let bg = document.querySelector(".bg");
+
+		let createDeck = document.querySelector(".create-deck");
+		let reincarnation = document.querySelector(".reincarnation");
+		let back1 = document.querySelector(".back1");
+		let back2 = document.querySelector(".back2");
+		let back3 = document.querySelector(".back3");
+		let hod = document.querySelector(".hod");
+
+		let player = document.querySelectorAll(".player");
+
+		let enemy = document.querySelectorAll(".enemy");
+
+		let hodp = document.querySelectorAll(".hodp");
+
+		let hode = document.querySelectorAll(".hode");
+
+		let deck = document.querySelector(".deck");
+		let origin = document.querySelector(".origin");
+		let map = document.querySelector(".map");
+		let game = document.querySelector(".game");
+
+		let cards = document.querySelector(".cards");
+		let preview = document.querySelector(".preview");
+
+		let mapBtn1 = document.querySelector(".map-btn1");
+		let mapBtn2 = document.querySelector(".map-btn2");
+		let mapBtn3 = document.querySelector(".map-btn3");
+		let mapBtn4 = document.querySelector(".map-btn4");
+		let mapBtn5 = document.querySelector(".map-btn5");
+
+		let dmgp0 = document.querySelector(".dmgp1");
+		let hpp0 = document.querySelector(".hpp1");
+
+		let dmgp1 = document.querySelector(".dmgp2");
+		let hpp1 = document.querySelector(".hpp2");
+
+		let dmgp2 = document.querySelector(".dmgp3");
+		let hpp2 = document.querySelector(".hpp3");
+
+		let dmgp3 = document.querySelector(".dmgp4");
+		let hpp3 = document.querySelector(".hpp4");
+
+		let dmge0 = document.querySelector(".dmge1");
+		let hpe0 = document.querySelector(".hpe1");
+
+		let dmge1 = document.querySelector(".dmge2");
+		let hpe1 = document.querySelector(".hpe2");
+
+		let dmge2 = document.querySelector(".dmge3");
+		let hpe2 = document.querySelector(".hpe3");
+
+		let dmge3 = document.querySelector(".dmge4");
+		let hpe3 = document.querySelector(".hpe4");
+
+		let deckpname = document.querySelector(".deckpname");
+		let deckename = document.querySelector(".deckename");
+
+		deck.style.display = 'none';
+		player[0].style.display = 'none';
+		player[1].style.display = 'none';
+		player[2].style.display = 'none';
+		player[3].style.display = 'none';
+		enemy[0].style.display = 'none';
+		enemy[1].style.display = 'none';
+		enemy[2].style.display = 'none';
+		enemy[3].style.display = 'none';
+		deckename.style.display = 'none';
+		deckpname.style.display = 'none';
+		map.style.display = 'none';
+
+		let getRandom = function() {
+			let num = Math.random() * 10;
+			let roundNum = Math.round(num);
+			return roundNum;
+		}
+
+		let opacity1 = function() {
+			bg.style.transition = '0.5s';
+			bg.style.opacity = '0';
+		}
+
+		let opacity2 = function() {
+			bg.style.transition = '1s';
+			bg.style.backgroundImage = maps;
+		}
+
+		let getImg = function() {
+			let num = Math.random() * 8;
+			let roundNum = Math.round(num);
+			return roundNum;
+		}
+
+		let player_cards = { 
+			img1: "url(deck/" + getImg() + ".png)",
+			dmg0: getRandom(),
+			hp0: getRandom(),
+			img2: "url(deck/" + getImg() + ".png)",
+			dmg1: getRandom(),
+			hp1: getRandom(),
+			img3: "url(deck/" + getImg() + ".png)",
+			dmg2: getRandom(),
+			hp2: getRandom(),
+			img4: "url(deck/" + getImg() + ".png)",
+			dmg3: getRandom(),
+			hp3: getRandom(),
+		}
+
+		let enemy_cards = {
+			img1: "url(deck/" + getImg() + ".png)",
+			dmg0: getRandom(),
+			hp0: getRandom(),
+			img2: "url(deck/" + getImg() + ".png)",
+			dmg1: getRandom(),
+			hp1: getRandom(),
+			img3: "url(deck/" + getImg() + ".png)",
+			dmg2: getRandom(),
+			hp2: getRandom(),
+			img4: "url(deck/" + getImg() + ".png)",
+			dmg3: getRandom(),
+			hp3: getRandom(),
+		}
+
+		createDeck.onclick = function() {
+			player[0].style.display = 'block';
+			player[1].style.display = 'block';
+			player[2].style.display = 'block';
+			player[3].style.display = 'block';
+			enemy[0].style.display = 'block';
+			enemy[1].style.display = 'block';
+			enemy[2].style.display = 'block';
+			enemy[3].style.display = 'block';
+			deckpname.style.display = 'block';
+			deckename.style.display = 'block';
+			back1check = back1check + 1;
+		}
+
+		reincarnation.onclick = function() {
+			alert("Нашему разработчику не дали чаевых");
+		}
+
+		card_btn.onclick = function() {
+			origin.style.display = 'none';
+			bg.style.backgroundImage = 'url(bg/6.jpg)';
+			deck.style.display = 'block';
+			if ( back1check > 0 ) {
+				player[0].style.display = 'block';
+				player[1].style.display = 'block';
+				player[2].style.display = 'block';
+				player[3].style.display = 'block';
+				enemy[0].style.display = 'block';
+				enemy[1].style.display = 'block';
+				enemy[2].style.display = 'block';
+				enemy[3].style.display = 'block';
+				deckpname.style.display = 'block';
+				deckename.style.display = 'block';
+			}
+		}
+
+		let back1check = 0;
+
+		back1.onclick = function() {
+			bg.style.backgroundImage = 'url(bg/2.jpg)';
+			deck.style.display = 'none';
+			origin.style.display = 'block';
+			player[0].style.display = 'none';
+			player[1].style.display = 'none';
+			player[2].style.display = 'none';
+			player[3].style.display = 'none';
+			enemy[0].style.display = 'none';
+			enemy[1].style.display = 'none';
+			enemy[2].style.display = 'none';
+			enemy[3].style.display = 'none';
+			deckpname.style.display = 'none';
+			deckename.style.display = 'none';
+		}
+
+		back2.onclick = function() {
+			bg.style.backgroundImage = 'url(bg/2.jpg)';
+			map.style.display = 'none';
+			origin.style.display = 'block';
+		}
+
+		back3.onclick = function() {
+			bg.style.backgroundImage = 'url(bg/2.jpg)';
+			game.style.display = 'none';
+			origin.style.display = 'block';
+			bg.style.transition = '0s';
+			player[0].style.display = 'none';
+			player[1].style.display = 'none';
+			player[2].style.display = 'none';
+			player[3].style.display = 'none';
+			enemy[0].style.display = 'none';
+			enemy[1].style.display = 'none';
+			enemy[2].style.display = 'none';
+			enemy[3].style.display = 'none';
+		}
+
+		map_btn.onclick = function() {
+			bg.style.backgroundImage = 'url(bg/5.jpg)';
+			origin.style.display = 'none';
+			deck.style.deck = 'none';
+			map.style.display = 'block';
+		}
+
+		let maps = 'url(bg/bg.jpg)';
+
+		mapBtn1.onclick = function() {
+			maps = 'url(bg/bg.jpg)';
+			preview.style.backgroundImage = 'url(bg/bg.jpg)';
+			preview.style.opacity = '1';
+		}
+
+		mapBtn2.onclick = function() {
+			maps = 'url(bg/cave_bg.jpeg)';
+			preview.style.backgroundImage = 'url(bg/cave_bg.jpeg)';
+			preview.style.opacity = '1';
+		}
+
+		mapBtn3.onclick = function() {
+			maps = 'url(bg/jungl_bg.jpg)';
+			preview.style.backgroundImage = 'url(bg/jungl_bg.jpg)';
+			preview.style.opacity = '1';
+		}
+
+		mapBtn4.onclick = function() {
+			maps = 'url(bg/totemic_bg.jpg)';
+			preview.style.backgroundImage = 'url(bg/totemic_bg.jpg)';
+			preview.style.opacity = '1';
+		}
+
+		mapBtn5.onclick = function() {
+			maps = 'url(bg/bg.jpg)';
+			preview.style.backgroundImage = 'url(bg/bg.jpg)';
+			preview.style.opacity = '1';
+		}
+
+		let games = function() {
+			game.style.display = 'block';
+			back3.style.display = 'block';
+			hod.style.display = 'block';
+			player[0].style.display = 'block';
+			player[0].style.top = '10px';
+			player[0].style.left = '10px';
+			player[1].style.display = 'block';
+			player[1].style.top = '230px';
+			player[1].style.left = '0px';
+			player[2].style.display = 'block';
+			player[2].style.top = '450px';
+			player[2].style.left = '10px';
+			player[3].style.display = 'block';
+			player[3].style.top = '450px';
+			player[3].style.left = '150px';
+			enemy[0].style.display = 'block';
+			enemy[0].style.top = '10px';
+			enemy[0].style.left = '1000px';
+			enemy[1].style.display = 'block';
+			enemy[1].style.top = '10px';
+			enemy[1].style.left = '1150px';
+			enemy[2].style.display = 'block';
+			enemy[2].style.top = '230px';
+			enemy[2].style.left = '1150px';
+			enemy[3].style.display = 'block';
+			enemy[3].style.top = '450px';
+			enemy[3].style.left = '1150px';
+		}
+
+		start_btn.onclick = function() {
+		 	bg.style.backgroundImage = 'url(bg/4.png)';
+		 	setTimeout(opacity2, 1000);
+		 	origin.style.display = 'none';
+		 	setTimeout(games, 2000)
+		}
+
+		let cardcheck = 0;
+		let player1pos = 10;
+		let player2pos = 0;
+		let player3pos = 10;
+		let player4pos = 150;
+		colvocardp = 4;
+
+		player[0].onclick = function(){
+			player1pos = 500;
+			cardcheck = cardcheck + 1;
+			player[0].style.top = '400px';
+			player[0].style.left = player1pos + 'px';
+			if ( player3pos == 500 ) {
+				player1pos = 700;
+				player[0].style.left = player1pos + 'px';
+			}
+			if ( cardcheck > 2 ) {
+				cardcheck = 2;
+				player[0].style.top = '10px';
+				player1pos = 10;
+				player[0].style.left = player1pos + 'px';
+			}
+		}
+
+		player[1].onclick = function(){
+			player2pos = 700;
+			cardcheck = cardcheck + 1;
+			player[1].style.top = '400px';
+			player[1].style.left = player2pos + 'px';
+			if ( player4pos == 700 ) {
+				player2pos = 500;
+				player[1].style.left = player2pos + 'px';
+			}
+			if ( cardcheck > 2 ) {
+				cardcheck = 2;
+				player1.style.top = '230px';
+				player2pos = 0;
+				player[1].style.left = player2pos + 'px';
+			}
+		}
+
+		player[2].onclick = function(){
+			player3pos = 500;
+			cardcheck = cardcheck + 1;
+			player[2].style.top = '400px';
+			player[2].style.left = player3pos + 'px';
+			if ( player1pos == 500 ) {
+				player3pos = 700;
+				player[2].style.left = player3pos + 'px';
+			}
+			if ( cardcheck > 2 ) {
+				cardcheck = 2;
+				player[2].style.top = '450px';
+				player3pos = 10;
+				player[2].style.left = player3pos + 'px';
+			}
+		}
+
+		player[3].onclick = function(){
+			player4pos = 700;
+			cardcheck = cardcheck + 1;
+			player[3].style.top = '400px';
+			player[3].style.left = player4pos + 'px';
+			if ( player2pos == 700 ) {
+				player4pos = 500;
+				player3.style.left = player4pos + 'px';
+			}
+			if ( cardcheck > 2 ) {
+				cardcheck = 2;
+				player[3].style.top = '450px';
+				player4pos = 150;
+				player[3].style.left = player4pos + 'px';
+			}
+		}
+
+		let RandomCard = function() {
+			let num = Math.random() * 3;
+			let roundNum = Math.round(num);
+			roundNum = roundNum + 1;
+			return roundNum;
+		}
+
+		let player0dead = function() {
+			player[0].style.display = 'none';
+			alert('Вас солдат мертв -1 карта')
+		}
+
+		let player2dead = function() {
+			player[2].style.display = 'none';
+			alert('Вас солдат мертв -1 карта')
+		}
+
+		let player1dead = function() {
+			player[1].style.display = 'none';
+			alert('Вас солдат мертв -1 карта')
+		}
+
+		let player3dead = function() {
+			player[3].style.display = 'none';
+			alert('Вас солдат мертв -1 карта')
+		}
+
+		let enemy0dead = function() {
+			enemy[0].style.display = 'none';
+			alert('Карта врага побеждена минус -1 карта')
+		}
+
+		let enemy1dead = function() {
+			enemy[1].style.display = 'none';
+			alert('Карта врага побеждена минус -1 карта')
+		}
+
+		let enemy2dead = function() {
+			enemy[2].style.display = 'none';
+			alert('Карта врага побеждена минус -1 карта')
+		}
+
+		let enemy3dead = function() {
+			enemy[3].style.display = 'none';
+			alert('Карта врага побеждена минус -1 карта')
+		}
+
+
+		hod.onclick = function() {
+			if ( cardcheck == 1 ) {
+				if ( player1pos == 500 ) {
+					enemy[0].style.left = '500px';
+					player_cards.hp0 = player_cards.hp0 - enemy_cards.dmg0;
+					enemy_cards.hp0 = enemy_cards.hp0 - player_cards.dmg0;
+					hpp0.innerHTML = player_cards.hp0;
+					hpe0.innerHTML = enemy_cards.hp0;
+					if ( player_cards.hp0 < enemy_cards.hp0 ) {
+						setTimeout(player0dead, 1500)
+					}
+					if ( enemy_cards.hp0 < player_cards.hp0 ) {
+						setTimeout(enemy0dead, 1500)
+					}
+				}
+				if ( player3pos == 500 ) {
+					enemy[0].style.left = '500px';
+					player_cards.hp2 = player_cards.hp2 - enemy_cards.dmg0;
+					enemy_cards.hp0 = enemy_cards.hp0 - player_cards.dmg2;
+					hpp2.innerHTML = player_cards.hp2;
+					hpe0.innerHTML = enemy_cards.hp0;
+					if ( player_cards.hp2 < enemy_cards.hp0 ) {
+						setTimeout(player2dead, 1500)
+					}
+					if ( enemy_cards.hp0 < player_cards.hp2 ) {
+						setTimeout(enemy0dead, 1500)
+					}
+				}
+				if ( player2pos == 700 ) {
+					enemy[0].style.left = '500px';
+					player_cards.hp1 = player_cards.hp1 - enemy_cards.dmg0;
+					enemy_cards.hp0 = enemy_cards.hp0 - player_cards.dmg1;
+					hpp1.innerHTML = player_cards.hp1;
+					hpe0.innerHTML = enemy_cards.hp0;
+					if ( player_cards.hp1 < enemy_cards.hp0 ) {
+						setTimeout(player1dead, 1500)
+					}
+					if ( enemy_cards.hp0 < player_cards.hp1 ) {
+						setTimeout(enemy0dead, 1500)
+					}
+				}
+				if ( player4pos == 700 ) {
+					enemy[0].style.left = '500px';
+					player_cards.hp3 = player_cards.hp3 - enemy_cards.dmg0;
+					enemy_cards.hp0 = enemy_cards.hp0 - player_cards.dmg3;
+					hpp3.innerHTML = player_cards.hp3;
+					hpe0.innerHTML = enemy_cards.hp0;
+					if ( player_cards.hp3 < enemy_cards.hp0 ) {
+						setTimeout(player1dead, 1500)
+					}
+					if ( enemy_cards.hp0 < player_cards.hp3 ) {
+						setTimeout(enemy0dead, 1500)
+					}
+				}
+					
+			}
+		}
+
+			player[0].style.backgroundImage = player_cards.img1;
+			dmgp0.innerHTML = player_cards.dmg0;
+			hpp0.innerHTML = player_cards.hp0;
+
+			player[1].style.backgroundImage = player_cards.img2;
+			dmgp1.innerHTML = player_cards.dmg1;
+			hpp1.innerHTML = player_cards.hp1;
+
+			player[2].style.backgroundImage = player_cards.img3;
+			dmgp2.innerHTML = player_cards.dmg2;
+			hpp2.innerHTML = player_cards.hp2;
+
+			player[3].style.backgroundImage = player_cards.img4;
+			dmgp3.innerHTML = player_cards.dmg3;
+			hpp3.innerHTML = player_cards.hp3;
+
+			enemy[0].style.backgroundImage = enemy_cards.img1;
+			dmge0.innerHTML = enemy_cards.dmg0;
+			hpe0.innerHTML = enemy_cards.hp0;
+
+			enemy[1].style.backgroundImage = enemy_cards.img2;
+			dmge1.innerHTML = enemy_cards.dmg1;
+			hpe1.innerHTML = enemy_cards.hp1;
+
+			enemy[2].style.backgroundImage = enemy_cards.img3;
+			dmge2.innerHTML = enemy_cards.dmg2;
+			hpe2.innerHTML = enemy_cards.hp2;
+
+			enemy[3].style.backgroundImage = enemy_cards.img4;
+			dmge3.innerHTML = enemy_cards.dmg3;
+			hpe3.innerHTML = enemy_cards.hp3;
+	</script>
+</body>
+</html>
